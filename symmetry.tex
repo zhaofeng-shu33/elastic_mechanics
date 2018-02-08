@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{amsfonts}
+\usepackage{bm}
+\begin{document}
+Consider a convex region $\Omega$ in $\mathbb{R}^3$ which is symmetric about both the three axes. The origin is the center of the solid described by $\Omega$. Now consider a surface force exerted on it. The force $\bm{T}$(Neuton per surface unit)$=(T_1,T_2,T_3)$ has the following property:
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+$T_1(-x,y,z)=-T_1(x,y,z)$ & $T_1(x,-y,z)=T_1(x,y,z)$ & $T_1(x,y,-z)=T_1(x,y,z)$\\
+\hline
+$T_2(-x,y,z)=T_2(x,y,z)$ & $T_2(x,-y,z)=-T_2(x,y,z)$ & $T_2(x,y,-z)=T_2(x,y,z)$\\
+\hline
+$T_3(-x,y,z)=T_3(x,y,z)$ & $T_3(x,-y,z)=T_3(x,y,z)$ & $T_3(x,y,-z)=-T_3(x,y,z)$\\
+\hline
+\end{tabular}
+
+
+To apply FEA(finite element analysis) on this solid, we can only consider $\frac{1}{8}$ of the region.
+The fundumental equation of linear elasticity
+\[
+-(\lambda+G)\mathop{\nabla}(\mathop{\nabla}\cdot\textbf{u})-G\mathop{{}\bigtriangleup}\nolimits \textbf{u}=\textbf{F},
+\]
+contains only the second derivatives of coponents of $\bm{u}$. Therefore, if the equation holds for $(u_1(x,y,z),u_2(x,y,z),u_3(x,y,z))$ and it also holds for example $(-u_1(-x,y,z),u_2(-x,y,z),u_3(-x,y,z))$ (already verified). Because the solution is unique, the only possibility is
+\begin{eqnarray*}
+u_1(x,y,z)&=-u_1(-x,y,z)\\
+u_2(x,y,z)&=u_2(-x,y,z)\\
+u_3(x,y,z)&=u_3(-x,y,z)
+\end{eqnarray*}
+
+
+As a result, $u_1$ is odd function about $x$, $u_2,u_3$ is even function about $x$.
+The other possibility is $(u_1(-x,y,z),-u_2(-x,y,z),-u_3(-x,y,z))$. The choice between the two dependes on the boundary condition symmetry about the x plane.
+
+By Cauchy's stress formula, $\bm{\sigma}\cdot \bm{n}=\bm{T}$.
+Since $n_1$ is odd function about x and the other two components are even function about x $\sigma_{11},\sigma_{22},\sigma_{33},\sigma_{23}$ is even function about x while $\sigma_{12},\sigma_{13}$ are odd function about x.
+By some calculation, we can verify $(-u_1(-x,y,z),u_2(-x,y,z),u_3(-x,y,z))$ satisfies the boundary condition. and we can get:
+\begin{eqnarray*}
+u_1(0,y,z)=0\\
+\frac{\partial u_2(x,y,z)}{\partial x}|_{x=0}=0\\
+\frac{\partial u_3(x,y,z)}{\partial x}|_{x=0}=0
+\end{eqnarray*}
+$\tau_{xy}=(\frac{\partial u_1(x,y,z)}{\partial y}+\frac{\partial u_2(x,y,z)}{\partial x})|_{x=0}=0$ and similarly $\tau_{xz}=0$
+In real calculation, natural boundary condition(Neumann,first order partial derivative) contributes nothing to integral of RHS of the weak form. And Dirichlet bounary condition adds enforced constraints to the assembled system matrix.
+The rule for variable z is similar:$u_2(x,0,z)=0,u_3(x,y,0)=0$.
+\end{document}

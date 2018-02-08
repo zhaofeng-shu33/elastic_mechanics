@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{amsfonts}
+\usepackage{bm}
+\begin{document}
+We give the constitutive model for non-linear material behaviour in small deformation with von-Mises criterion yield function.
+The flow potential $F$ is given by:
+\[
+F=f-k
+\]
+where
+\[
+f=\frac{1}{2}s_{ij}s_{ij}
+\]
+in tensor nototation, and 
+\[
+k=\frac{1}{3}\sigma_{y}^2
+\]
+The consistency condition (in plastic deformation period) requires that:
+$F=0$.
+Therefore the total derivative $dF=0$
+and we can get (in tensor notation)
+\begin{equation}\label{eq:Consistency}
+\frac{\partial{f}}{\partial \sigma_{ij}}d\sigma_{ij}-\frac{2}{3}\sigma_{y}\frac{d\sigma_y}{d\bar{\epsilon}_p}d\bar{\epsilon}_p=0
+\end{equation}
+
+where $\bar{\epsilon}_p$ is the acumulated plastic strain.
+By flow rule we can get 
+\[
+d \epsilon^p=d\lambda \frac{\partial f}{\partial{\bm{\sigma}}}
+\]
+we also have \[
+d \bar{\epsilon}_p=\sqrt{\frac{2}{3}}||d\epsilon^p||_f
+\]
+where $||\cdot||_f$ denotes the Frobinious norm of a rank 2 tensor.
+By the expresion of $f$,
+we have
+\[
+\frac{\partial{f}}{\partial \sigma_{ij}}=s_{ij}
+\]
+therefore,
+\[
+d \bar{\epsilon}_p=\sqrt{\frac{2}{3}}d\lambda||\bm{s}||_f
+\]
+Since $f-k=0$ we have $||\bm{s}||_f=\sqrt{\frac{2}{3}}\sigma_y$
+In conclusion we have:
+\begin{equation}
+d \bar{\epsilon}_p=\frac{2}{3}\sigma_yd\lambda
+\end{equation}
+Define the hardening modulus: $E_p=\frac{d\sigma_y}{d\bar{\epsilon}_p}$
+From (\ref{eq:Consistency}) we get:
+\begin{equation}\label{eq:xxx}
+s_{ij}d\sigma_{ij}-\frac{4}{9}\sigma_y^2E_pd\lambda=0
+\end{equation}
+In small deformation, the strain increment can be decomposed additively as: 
+\[
+d\epsilon_{ij}=d \epsilon_{ij}^e+d \epsilon_{ij}^p
+\]
+By generalized Hook's Law:
+\begin{align*}\notag
+d\sigma_{ij}=&D^e_{ijkl}(d\epsilon_{kl}-d\epsilon_{kl}^p)\\
+=&D^e_{ijkl}(d\epsilon_{kl}-s_{kl}d\lambda )
+\end{align*}
+Combining this equation with (\ref{eq:xxx}), we can solve out:
+\[
+d\lambda=\frac{s_{ij}D_{ijkl}^e d \epsilon_{kl}}{s_{ij}s_{kl}D^e_{ijkl}+\frac{4}{9}\sigma_y^2 E_p}
+\]
+We replace $d\lambda$ in $d\sigma_{ij}=D^e_{ijkl}(d\epsilon_{kl}-s_{kl}d\lambda )$ with the above expression and get the non-linear relation between stress and strain in elastoplastic deformation:
+\[
+d\sigma_{ij}=D^{ep}_{ijkl}d \epsilon_{kl}
+\]
+where $D^{ep}_{ijkl}=D^e_{ijkl}-D^p_{ijkl}$. $\bm{D}^{ep}$ is called  elastoplastic tangent modulus and 
+\[
+D^p_{ijkl}=\frac{s_{mn}D^e_{ijmn}s_{qr}D^e_{qrkl}}{s_{mn}s_{qr}D^e_{qrmn}+\frac{4}{9}\sigma_y^2 E_p}
+\]
+Since (in 3D)
+\[
+D^e_{qrmn}=\lambda \delta_{qr}\delta_{mn}+G(\delta_{qm}\delta_{rn}+\delta_{qn}\delta_{rm})
+\]
+The denominator can be simplified to (use $\frac{1}{2}s_{ij}s_{ij}=\frac{\sigma_y^2}{3}$):
+\begin{align*}\notag
+s_{mn}s_{qr}D^e_{qrmn}+\frac{4}{9}\sigma_y^2 E_p=&\lambda(s_{mm}s_{qq})+2G s_{mn}s_{mn}+\frac{4}{9}\sigma_y^2 E_p\\
+=&\frac{4\sigma_y^2}{9}(3G+E_p)
+\end{align*}
+Similarly, the numerator can be simplified to
+\[
+s_{mn}D^e_{ijmn}s_{qr}D^e_{qrkl}=4G^2s_{ij}s_{kl}
+\]
+As a result, we get:
+\begin{equation}
+D^p_{ijkl}=\frac{9G^2 s_{ij}s_{kl}}{\sigma_y^2(3G+E_p)}
+\end{equation}
+\end{document}

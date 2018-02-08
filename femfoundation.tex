@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{amsfonts}
+\usepackage{bm}
+\begin{document}
+\section{Virtual Displacement Principle}
+From Equilibrium Equation (tensor notation):
+\[
+\sigma_{ij,j}+f_i=0 \text{ in } V
+\]
+stress BC:
+\[
+\sigma_{ij}n_j=T_i \text{ in } S_{\sigma}
+\]
+Multiplying the above two equations with virtual displacement
+$\delta{u}_i$ and integral in the corresponding region, we get
+\begin{equation}
+\int_V \delta{u_i}(\sigma_{ij,j}+f_i)dV-\int_{S_{\sigma}} \delta{u_i}(\sigma_{ij}n_j-T_i)dS=0
+\end{equation}
+We integrate the following expression by part($\delta u_i:=(\delta u)_i$):
+\begin{align*}
+\int_V \delta{u_i}\sigma_{ij,j}dV=& \int_V (\delta u_i \sigma_{ij} )_j dV-\int_V \frac{1}{2}(\delta u_{i,j}+\delta u_{j,i})\sigma_{ij} dV\\
+=&\int_{S_{\sigma}} \delta u_i \sigma_{ij} n_j dS-\int_V \delta \epsilon_{ij} \sigma_{ij} dV
+\end{align*}
+It follows:
+\begin{equation}
+\int_V \delta{\epsilon_{ij}}\sigma_{ij}dV=\int_V \delta u_i f_i dV+\int_{S_{\sigma}} \delta{u_i}T_idS
+\end{equation}
+For linear elasticity:
+\begin{equation}\label{eq:LE}
+\int_V \delta{\epsilon_{ij}}D_{ijkl}^e \epsilon_{kl}dV=\int_V \delta u_i f_i dV+\int_{S_{\sigma}} \delta{u_i}T_idS
+\end{equation}
+$V=\cup V_i$ where $V_i \cap V_j =\emptyset$ for $i\neq j$.
+Each $V_i$ is a cell which contains K nodes (vertex). The degree of freedom used on each cell equals the dimension of the problem times the number of nodes per cell.
+Consider a particular cell $V^*$, on $V^*$ we have:
+\[
+u_i=U_{ti}\phi_{ti}
+\]
+Take $\delta u_i=\delta_{ii^*}\phi_{ri^*}$($r,i^*$ is prescribed, corresponding to $\delta$), we have:
+\begin{align*}
+\delta{\epsilon_{ij}}=&\frac{1}{2}(\delta u_{i,j}+\delta u_{j,i})\\
+=&\frac{1}{2}(\delta_{ii^*}\phi_{ri^*,j}+\delta_{ji^*}\phi_{ri^*,i})
+\end{align*}
+and
+\begin{align*}
+{\epsilon_{kl}}=&\frac{1}{2}(\delta u_{k,l}+\delta u_{l,k})\\
+=&\frac{1}{2}(U_{tk}\phi_{tk,l}+U_{tl}\phi_{tl,k})
+\end{align*}
+For isotropic material $D_{ijkl}^e=D_{ijlk}^e$,then
+\begin{align*}
+D_{ijkl}^e\epsilon_{kl}=&\frac{1}{2}(D_{ijkl}^eU_{tk}\phi_{tk,l}+D_{ijlk}^eU_{tk}\phi_{tk,l})\\
+=&D_{ijkl}^eU_{tk}\phi_{tk,l}
+\end{align*}
+The above relation also holds for $D^{ep}_{ijkl}=D^e_{ijkl}-D^p_{ijkl}$
+For given $r,i^*,t,k$, we have:
+\begin{align*}
+\delta \epsilon_{ij}D_{ijkl}^e\epsilon_{kl}=&\delta_{ii^*}\phi_{ri^*,j}D_{ijkl}^e \phi_{tk,l} U_{tk}\\
+=&\left(\delta_{ii^*}\phi_{ri^*,j}(\lambda\delta_{ij}\phi_{tk,k}+G(\delta_{ik}\phi_{tk,j}+\delta_{jk}\phi_{tk,i}))\right)U_{tk}\\
+=&(\lambda \phi_{ri^*,i^*}\phi_{tk,k}+G \phi_{ri^*,k}\phi_{tk,i^*}+G\delta_{i^*k}\phi_{ri^*,j}\phi_{tk,j})U_{tk}
+\end{align*}
+Notice the last term sums over $j$ when $i^*=k$.
+For $D^{ep}_{ijkl}$, we revise the above by $\delta \epsilon_{ij} D^p_{ijkl} \epsilon_{kl}$ when the yielding condition is reached:
+\begin{equation}
+\delta \epsilon_{ij} D^p_{ijkl} \epsilon_{kl}=\phi_{ri^*,j}D^p_{i^*jkl}\phi_{tk,l} U_{tk}
+\end{equation}
+The summation is over $ j$ and $l$.
+From (\ref{eq:LE}), we get for plastic case that:
+\begin{equation}
+\int_V \delta{\epsilon_{ij}}(D_{ijkl}^{ep} \Delta \epsilon_{kl}+\sigma^n_{ij})dV=\int_V \delta u_i f_i dV+\int_{S_{\sigma}} \delta{u_i}T_idS
+\end{equation}
+Then we get that $\sigma^n_{ij}$ contributes to the RHS:
+\begin{equation}
+-\int_V \delta{\epsilon_{ij}}\sigma^n_{ij}=-\int_V  \phi_{ri^*,j}\sigma_{i^*j}^n dV
+\end{equation}
+For axisymmetric problem, the displacement component vanishes along the $\hat{\theta}$, therefore the problem reduces to 2D.
+From (\ref{eq:LE}) we change the integration to cylinderal representation and with $u_{\theta}\equiv 0$ in mind and ignoring $\bm{f}$, we get
+\begin{equation}
+\int_{\Sigma}\delta{\epsilon}_{ij}\sigma_{ij}rdrdz=\int_{L} \delta u_r T_r+\delta u_z T_z dz
+\end{equation}
+where $\Sigma$ is a section of revolution plane, and $L$ is $\partial\Sigma$ minus the revolution axis.To solve the equivalent 2D problem, we need mesh $\Sigma$ and apply Dirichlet BC on the revolution axis for $u_r$.
+For the LHS, we can further simply it using matrix form:
+\begin{align}
+\delta{\epsilon}_{ij}\sigma_{ij}=&(\delta \bm{\epsilon})^T D \bm{\epsilon}\\
+=&(\delta \bm{u})^T (\bm{B}\bm{D}\bm{B})\bm{u}
+\end{align}
+where $u=(u_r,u_z)^T$ and 
+\[
+B= \left(\begin{matrix}
+\frac{\partial}{\partial r} & 0\\
+0 & \frac{\partial}{\partial r}\\
+\frac{1}{r} & 0\\
+\frac{\partial}{\partial z}&\frac{\partial}{\partial r}\\
+\end{matrix}\right),D=\left(\begin{matrix}
+\lambda+2G & \lambda&\lambda&0\\
+\lambda & \lambda+2G&\lambda&0\\
+\lambda & \lambda&\lambda+2G&0\\
+0&0&0&G\\
+\end{matrix}\right)
+\]
+In real calculation, there will be a term $\frac{1}{r}$ for integration, and the mesh grid can not be too refined near the revolution axis.
+\end{document}

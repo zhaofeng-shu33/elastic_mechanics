@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{bm}
+\begin{document}
+Basic formula of elastic equation in displacement form:
+\begin{equation}
+\lambda\nabla(\nabla \cdot \bm{u})+G \nabla\cdot[(\nabla\bm{u})^T+\nabla\bm{u}]+\bm{F}=0
+\end{equation}
+for test function $\bm{u}$,which is zero on part$ \Gamma_D\subset \partial \Omega$ weak form:
+\begin{equation}
+\lambda(\nabla(\nabla \cdot \bm{u}),\bm{v})_{\Omega}+G(\nabla\cdot[(\nabla\bm{u})^T+\nabla\bm{u}],\bm{v})_{\Omega}+(\bm{F},\bm{v})_{\Omega}=0.
+\end{equation}
+The inner product is defined by (d=2 or 3):
+\begin{equation}
+(\bm{u},\bm{v})=\sum_{i=1}^d \int_{\Omega}\bm{u}_i(\bm{x})\bm{v}_i(\bm{x})d\bm{x}
+\end{equation}
+we denote $\bm{\epsilon}(\bm{u})=\frac{1}{2}[(\nabla\bm{u})^T+\nabla\bm{u}]$, which is strain tensor.
+Therefore, the weak form is:
+\begin{equation}
+\lambda(\nabla(\nabla \cdot \bm{u}),\bm{v})_{\Omega}+2G(\nabla\cdot\bm{\epsilon}(\bm{u}),\bm{v})_{\Omega}+(\bm{F},\bm{v})_{\Omega}=0.
+\end{equation}
+We integrate by parts and use divergence theorem:
+\begin{equation}
+-\lambda(\nabla \cdot \bm{u},\nabla\cdot\bm{v})_{\Omega}+\lambda(\bm{n}\cdot\bm{v},\nabla\cdot\bm{u})_{\partial\Omega}-2G(\bm{\epsilon}(\bm{u}),\nabla\bm{v})_{\Omega}
++2G(\bm{\epsilon}(\bm{u}),\bm{n}\otimes\bm{v})_{\partial\Omega}+(\bm{F},\bm{v})_{\Omega}=0.
+\end{equation}
+where $\bm{n}$ is the normal vector at boundary $\partial\Omega$
+For boundary condition, notice the symmetric property of $\bm{\epsilon}(\bm{u})$
+we have:
+\begin{equation}
+\lambda(\bm{n}\cdot\bm{v},\nabla\cdot\bm{u})_{\partial\Omega}
++2G(\bm{\epsilon}(\bm{u}),\bm{n}\otimes\bm{v})_{\partial\Omega}=(\bm{v},((\lambda\nabla\cdot\bm{u})\bm{I}_d+2G\bm{\epsilon}(\bm{u}))\cdot\bm{n})_{\Gamma_N}
+\end{equation}
+It follows:
+\begin{equation}
+(\bm{v},((\lambda\nabla\cdot\bm{u})\bm{I}_d+2G\bm{\epsilon}(\bm{u}))\cdot\bm{n})_{\Gamma_N}=(\bm{v},\bm{\sigma}\cdot\bm{n})_{\Gamma_N}
+\end{equation}
+Therefore, if we prescribe stress boundary condition:
+\[
+\bm{\sigma}\cdot\bm{n}=\bm{T}
+\],
+then the neumann condition contributes to the right hand side of the weak form integration$(\bm{v},\bm{T})_{\Gamma_N}$
+In conclusion, the weak formulation follows:
+\begin{equation}
+\lambda(\nabla \cdot \bm{u},\nabla\cdot\bm{v})_{\Omega}+2G(\bm{\epsilon}(\bm{u}),\nabla\bm{v})_{\Omega}
+=(\bm{F},\bm{v})_{\Omega}+(\bm{v},\bm{T})_{\Gamma_N}.
+\end{equation}
+\end{document}
